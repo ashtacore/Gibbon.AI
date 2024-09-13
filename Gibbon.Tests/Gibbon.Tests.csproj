@@ -20,4 +20,15 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Gibbon.AI\Gibbon.AI.csproj" />
+      <ProjectReference Include="..\Gibbon.Common\Gibbon.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="AppSettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
