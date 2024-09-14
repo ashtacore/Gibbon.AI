@@ -9,14 +9,15 @@ namespace Gibbon.AI.Models.Chat
         
         public string Text { get; set; }
 
-        private string _imageBase64 = string.Empty; 
+        private string _imageBase64; 
         public ImageSource ImageSource { get; private set; }
+        private string _imageURI;
         public string ImageURI
         {
-            get => this.ImageURI;
+            get => this._imageURI;
             set
             {
-                ImageURI = value;
+                _imageURI = value;
                 if (value.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
                 {
                     ImageSource = ImageSource.URL;

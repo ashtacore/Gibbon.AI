@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using OpenAI.Chat;
 
 namespace Gibbon.AI.Models.Chat
 {
@@ -6,11 +8,11 @@ namespace Gibbon.AI.Models.Chat
     {
         public List<Message> Messages { get; set; }
         public int? MaxTokens { get; set; }
-        public double Temperature { get; set; }
+        public float Temperature { get; set; }
         public string[] StopSequences { get; set; }
 
         public Conversation(string systemInstruction, int? maxTokens = null,
-            double temperature = 1.0, string[] stopSequences = null)
+            float temperature = 1F, string[] stopSequences = null)
         {
             this.MaxTokens = maxTokens;
             this.Temperature = temperature;
@@ -28,6 +30,21 @@ namespace Gibbon.AI.Models.Chat
             {
                 this.Messages.Add(message);
             }
+        }
+
+        public void SetSystemInstruction(string systemInstruction)
+        {
+            this.Messages[0] = new Message(Role.System, systemInstruction);
+        }
+
+        public ChatCompletionOptions GetOpenAIConfig()
+        {
+            return new ChatCompletionOptions()
+            {
+                MaxTokens = this.MaxTokens,
+                Temperature = this.Temperature,
+                //StopSequences = this.StopSequences,
+            };
         }
     }
 }

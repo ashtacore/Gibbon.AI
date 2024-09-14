@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
+using Gibbon.AI.Models;
+
 namespace Gibbon.AI.Interfaces.Purpose
 {
-    public interface IChat
+    public interface IChat : IGeneral
     {
-       string SendMessage(string message);
+        Task<string> SendMessage(string message);
     }
 }

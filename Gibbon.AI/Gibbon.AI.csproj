@@ -2,9 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AWSSDK.BedrockRuntime" Version="3.7.403.8" />
       <PackageReference Include="OpenAI" Version="2.0.0-beta.11" />
     </ItemGroup>
 

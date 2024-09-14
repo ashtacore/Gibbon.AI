@@ -1,10 +1,13 @@
 using Gibbon.AI.Interfaces.Purpose;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit.Abstractions;
 
 namespace Gibbon.Tests.Services.Chat;
 
 public class General : Entry
 {
+    private readonly ITestOutputHelper _testOutputHelper;
+
     #region Test Data
 
     private string testMessage = "How many Rs are in strawberry";
@@ -13,19 +16,20 @@ public class General : Entry
     
     private readonly IChat[] _chatServices;
     
-    public General()
+    public General(ITestOutputHelper testOutputHelper)
     {
+        _testOutputHelper = testOutputHelper;
         _chatServices = this.ServiceProvider.GetServices<IChat>().ToArray();
     }
 
     [Fact]
-    public void SendMessage()
+    public async void SendMessage()
     {
         foreach (var chatService in _chatServices)
         {
-            var response = chatService.SendMessage(testMessage);
+            var response =  await chatService.SendMessage(testMessage);
             
-            Console.WriteLine(response);
+            _testOutputHelper.WriteLine(response);
             
             Assert.False(string.IsNullOrWhiteSpace(response));
         }
